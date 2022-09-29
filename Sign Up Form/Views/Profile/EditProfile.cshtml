@@ -1,0 +1,411 @@
+﻿
+@model Sign_Up_Form.Models.UserPost
+@{
+    int passwordMatched = ViewBag.passwordmatched;
+
+}
+@section FeedHeader
+{
+       <script defer src="~/js/editProfile.js"></script>
+        <link rel="stylesheet" href="~/css/editProfile.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+        <script defer src="https://kit.fontawesome.com/1cf337f2af.js" crossorigin="anonymous"></script>
+
+    <!-- fontawesome -->
+      
+}
+
+  <!-- =================Web Appbar ================= -->
+  <div class="bg-white d-flex align-items-center fixed-top shadow" style="min-height: 56px; z-index: 7">
+
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <!-- search -->
+        <div class="col d-flex align-items-center">
+          <!-- logo -->
+
+          <div class="logo text-primary text-center justify-content-center mt-3 " style="width: 50px;height: 50px;">
+            <i class="fa-solid fa-chess-knight fs-2 text-muted "></i>
+          </div>
+          <!-- search bar -->
+          <div class="input-group ms-2" type="button">
+            <!-- mobile -->
+            <span class="input-group-prepend d-lg-none" id="searchMenu" data-bs-toggle="dropdown" aria-expanded="false"
+              data-bs-auto-close="outside">
+              <div class="input-group-text bg-gray border-0 rounded-circle" style="min-height: 40px">
+                <i class="fas fa-search text-muted"></i>
+              </div>
+            </span>
+            <!-- desktop -->
+            <span class="input-group-prepend d-none d-lg-block" id="searchMenu" data-bs-toggle="dropdown"
+              aria-expanded="false" data-bs-auto-close="outside">
+              <div class="input-group-text bg-gray border-0 rounded-pill" style="min-height: 40px; min-width: 230px">
+                <i class="fas fa-search me-2 text-muted"></i>
+                <p class="m-0 fs-7 text-muted">Search category</p>
+              </div>
+            </span>
+            <!-- search menu -->
+            <ul class="dropdown-menu overflow-auto border-0 shadow p-3" aria-labelledby="searchMenu"
+              style="width: 20em; max-height: 600px">
+              <!-- search input -->
+              <li>
+                <input type="text" class="rounded-pill border-0 bg-gray dropdown-item" placeholder="Search Blog..."
+                  autofocus />
+              </li>
+              <!-- search 1 -->
+              <li class="my-4">
+                <div class="
+                      alert
+                      fade
+                      show
+                      dropdown-item
+                      p-1
+                      m-0
+                      d-flex
+                      align-items-center
+                      justify-content-between
+                    " role="alert">
+                  <div class="d-flex align-items-center">
+                    <img src="https://source.unsplash.com/random/1" alt="avatar" class="rounded-circle me-2"
+                      style="width: 35px; height: 35px; object-fit: cover" />
+                    <p class="m-0">Lorem ipsum</p>
+                  </div>
+                  <button type="button" class="btn-close p-0 m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              </li>
+              <!-- search 2 -->
+              <li class="my-4">
+                <div class="
+                      alert
+                      fade
+                      show
+                      dropdown-item
+                      p-1
+                      m-0
+                      d-flex
+                      align-items-center
+                      justify-content-between
+                    " role="alert">
+                  <div class="d-flex align-items-center">
+                    <img src="https://source.unsplash.com/random/2" alt="avatar" class="rounded-circle me-2"
+                      style="width: 35px; height: 35px; object-fit: cover" />
+                    <p class="m-0">Lorem ipsum</p>
+                  </div>
+                  <button type="button" class="btn-close p-0 m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              </li>
+              <!-- search 3 -->
+              <li class="my-4">
+                <div class="
+                      alert
+                      fade
+                      show
+                      dropdown-item
+                      p-1
+                      m-0
+                      d-flex
+                      align-items-center
+                      justify-content-between
+                    " role="alert">
+                  <div class="d-flex align-items-center">
+                    <img src="https://source.unsplash.com/random/3" alt="avatar" class="rounded-circle me-2"
+                      style="width: 35px; height: 35px; object-fit: cover" />
+                    <p class="m-0">Lorem ipsum</p>
+                  </div>
+                  <button type="button" class="btn-close p-0 m-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- nav -->
+        <div class="col d-none d-xl-flex justify-content-center">
+            <!-- home -->
+            <div class="mx-4 nav__btn ">
+                <form asp-action="GetHome" asp-controller="Home">
+                   <input name="UserId" class="d-none" value="@Model.user.Id" />
+                  <button type="submit" class="btn px-4 unbutton">
+                    <i class="fas fa-home text-muted fs-4"></i>
+                  </button>
+              </form>
+            </div>
+            <!-- categories -->
+            <!-- Adventrous + travelling -->
+            <div class="mx-4 nav__btn unbutton">
+           <form asp-action="Adventurours" asp-controller="Home">
+               <input name="UserId" class="d-none" value="@Model.user.Id" />
+
+                   
+                   <button  type="submit" class="btn px-4 unbutton" >
+                      
+                    <i  title="Adventurous Blogs" class="fa-solid fa-person-hiking text-muted fs-4"></i>
+                
+                  </button>
+             </form>
+            </div>
+          
+            <!-- Sports -->
+            <div class="mx-4 nav__btn" title="Sports BLogs">
+                <form asp-action="Sports" asp-controller="Home">
+                   <input name="UserId" class="d-none" value="@Model.user.Id" />
+                  <button type="submit" class="btn px-4 unbutton" >
+                
+                    <i class="fa-solid position-relative fa-baseball text-muted fs-4">
+                  
+                    </i>
+                  </button>
+              </form>
+            </div>
+            <!-- gaming -->
+            <div class="mx-4 nav__btn" title="gaming blogs">
+              <form asp-action="Gaming" asp-controller="Home">
+                   <input name="UserId" class="d-none" value="@Model.user.Id" />
+                  <button type="submit" class="btn px-4 unbutton" >
+                <i class="fas fa-gamepad text-muted fs-4"></i>
+              </button>
+              </form>
+            </div>
+          </div>
+        <!-- menus -->
+        <div class="col d-flex align-items-center justify-content-end ">
+          <!-- avatar -->
+          <div class="align-items-center justify-content-center d-none d-xl-flex nav__btn nav__btn-active ">
+            <img src="~/@Model.user.ImageUrl" class="rounded-circle me-2" alt="avatar"
+              style="width: 38px; height: 38px; object-fit: cover" />
+            <p class="m-0">@Model.user.FirstName @Model.user.LastName</p>
+            <!-- profile menu -->
+            <div class="
+              rounded-circle
+              p-1
+              bg-gray
+              d-flex
+              align-items-center
+              justify-content-center
+              mx-2
+              
+            " style="width: 38px; height: 38px" type="button" id="secondMenu" data-bs-toggle="dropdown"
+              aria-expanded="false" data-bs-auto-close="outside">
+              <i class="fas fa-caret-down bluemarked"></i>
+            </div>
+            <!-- secondary menu dd -->
+            <ul class="dropdown-menu border-0 shadow p-3" aria-labelledby="secondMenu" style="width: 23em">
+              <!-- avatar -->
+              <li class="dropdown-item p-1 rounded d-flex" type="button">
+                <img src="~/@Model.user.ImageUrl" alt="avatar" class="rounded-circle me-2"
+                  style="width: 45px; height: 45px; object-fit: cover" />
+                <div>
+                  <p class="m-0">@Model.user.FirstName @Model.user.LastName</p>
+                  <p class="m-0 text-muted">See your profile</p>
+                </div>
+              </li>
+              <hr />
+              <!-- logout -->
+              <li class="dropdown-item p-1 my-3 rounded" type="button">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a asp-route="LogOut" class="d-flex text-decoration-none text-dark">
+                      <i class="fas fa-cog bg-gray p-2 rounded-circle"></i>
+                      <div class="
+                        ms-3
+                        d-flex
+                        justify-content-between
+                        align-items-center
+                        w-100
+                      ">
+                        <p class="m-0">Log Out</p>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <!-- end -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ @if(passwordMatched==1)
+        {
+          <div class=" alert alert-success justify-content-center " id="updateddb" role="alert">
+          successfully updated
+        </div>
+        }
+  <div class="container my-10 shadow" style="margin-top:100px;">
+    <div class="row flex-lg-nowrap">
+     
+        
+      <div class="col">
+        <div class="row mt-3">
+          <div class="col mb-3">
+            <div class="card border-0">
+              <div class="card-body">
+                <div class="e-profile">
+                  <div class="row">
+                    <div class="col-12 col-sm-auto mb-3  ">
+                      <div class="profile-pic">
+                                       <div class="pic-holder">
+                    <!-- uploaded pic shown here -->
+                    <img width="250px" height="250px" id="profilePic" class="pic" src="~/@Model.user.ImageUrl">
+
+                   
+                    
+                  </div>
+                      </div>
+                      
+                    </div>
+                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                      <div class="text-center text-sm-left mb-2 mb-sm-0">
+                        <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">@Model.user.FirstName @Model.user.LastName</h4>
+                        
+                        <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                        <div class="mt-2">
+                          <button class="btn btn-primary" type="button" id="uploadPic">
+                            <i class="fa fa-fw fa-camera"></i>
+                            <span>Change Photo</span>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="text-center text-sm-right">
+                        <span class="badge badge-secondary">administrator</span>
+                        <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                  </ul>
+                  <div class="tab-content pt-3">
+                    <div class="tab-pane active">
+                      <form class="form" enctype="multipart/form-data" method="post" asp-action="update" asp-controller="Profile" >
+
+                       <Input class="d-none uploadProfileInput" type="file" name="UserProfileImage" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                       <Input class="d-none" type="text" name="imageUrl"  value="@Model.user.ImageUrl" />
+                        <div class="row">
+                          <div class="col">
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group text-muted">
+                                  <label >FirstName</label>
+                                  <input   class="form-control" type="text" name="FirstName" value="@Model.user.FirstName" placeholder="@Model.user.FirstName"
+                                    >
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>lastname</label>
+                                  <input class="d-none" name="userId" value="@Model.user.Id"/>
+                                  <input class="form-control" type="text" name="LastName" value="@Model.user.LastName" placeholder="@Model.user.LastName"
+                                    >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Email</label>
+                                  <input disabled class="form-control" type="text" placeholder="@Model.user.Email" id="Modelemail">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col mb-3">
+                                <div class="form-group">
+                                  <label>About</label>
+                                  <textarea class="form-control" rows="5" name="About" value="@Model.user.About" placeholder="@Model.user.About"></textarea>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-sm-6 mb-3">
+                            <div class="mb-2"><b>Change Password</b></div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Current Password</label>
+                                  <input class="form-control" type="password" required  placeholder="Enter current password" name="userPassword" >
+                                  @if(passwordMatched==2)
+                                  {
+                                      <p class="text-danger"> password did not matched</p>
+                                  }
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>New Password</label>
+                                  <input class="form-control" type="password" required placeholder="Enter new password" name="new_password">
+                                </div>
+                              </div>
+                            </div>
+                            
+                          </div>
+                          <div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Date of birth</label>
+                                  <input disabled class="form-control" type="password" placeholder="@Model.user.DateOfBirth">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Gender</label>
+                                  <input disabled class="form-control" name="gender" type="text" placeholder="male">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col d-flex justify-content-end">
+                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                          </div>
+                        </div>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-3 mb-3 ">
+            <div class="card mb-3 border-0">
+              <div class="card-body">
+                <div class="px-xl-3">
+                  <button class="btn btn-block btn-secondary">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Logout</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card border-0">
+              <div class="card-body">
+                <h6 class="card-title font-weight-bold">Support</h6>
+                <p class="card-text">Get fast, free help from our friendly assistants.</p>
+                <button type="button" class="btn btn-primary">Contact Us</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>

@@ -1,0 +1,568 @@
+﻿@model List<Sign_Up_Form.Models.UserPost> ;
+
+@{
+    //last user is the user logged in
+    ViewData["title"] = "ShareYourRoutine";
+    ViewData["firstname"] = @Model[Model.Count-1].user.FirstName;
+    ViewData["lastname"] = @Model[Model.Count-1].user.LastName;
+    ViewData["Id"] = @Model[Model.Count-1].user.Id;
+    ViewData["image"] = @Model[Model.Count-1].user.ImageUrl;
+    UserPost curUser = @Model[Model.Count - 1];
+}
+  
+    @*section layout*@
+    @section FeedHeader{
+
+    <link href="~/css/feed.css" rel="stylesheet"/>
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <script src="https://kit.fontawesome.com/1cf337f2af.js" crossorigin="anonymous"></script>
+    <!-- fontawesome -->
+    
+   
+   <script defer src="~/js/NewsFeed/Feed.js"></script>
+    
+    }
+  
+  <body onload="hideLoadingDiv()" class="bg-gray postion-relative">
+    <!-- =================Web Appbar ================= -->
+    <div
+      class="bg-white d-flex align-items-center fixed-top shadow"
+      style="min-height: 56px; z-index: 7"
+    >
+      <input class="d-none" id="CurrentUserId" value="@curUser.user.Id"/>
+          <div class="container-fluid">
+        <div class="row align-items-center">
+          <!-- search -->
+          <div class="col d-flex align-items-center">
+            <!-- logo -->
+           
+            <div class="logo text-primary text-center justify-content-center mt-3 "  style="width: 50px;height: 50px;">
+              <i class="fa-solid fa-chess-knight fs-2 text-muted "></i>
+            </div>   
+            <!-- search bar -->
+            <div class="input-group ms-2" type="button">
+              <!-- mobile -->
+              <span
+                class="input-group-prepend d-lg-none"
+                id="searchMenu"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-bs-auto-close="outside"
+              >
+                <div
+                  class="input-group-text bg-gray border-0 rounded-circle"
+                  style="min-height: 40px"
+                >
+                  <i class="fas fa-search text-muted"></i>
+                </div>
+              </span>
+              <!-- desktop -->
+              <span
+                class="input-group-prepend d-none d-lg-block"
+                id="searchMenu"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-bs-auto-close="outside"
+              >
+                <div
+                  class="input-group-text bg-gray border-0 rounded-pill"
+                  style="min-height: 40px; min-width: 230px"
+                >
+                  <i class="fas fa-search me-2 text-muted"></i>
+                  <p class="m-0 fs-7 text-muted">Search category</p>
+                </div>
+              </span>
+              <!-- search menu -->
+              <ul
+                class="dropdown-menu overflow-auto border-0 shadow p-3"
+                aria-labelledby="searchMenu"
+                style="width: 20em; max-height: 600px"
+              >
+                <!-- search input -->
+                <li>
+                  <input
+                    type="text"
+                    class="rounded-pill border-0 bg-gray dropdown-item"
+                    placeholder="Search Blog..."
+                    autofocus
+                    id="SearchingWordsInBlogs"
+                    value=""
+                  />
+                </li>
+                <!-- checkbox 1 -->
+               
+                <!-- checkbox 2 -->
+                <li class="my-4">
+                  <div
+                    class="
+                      alert
+                      fade
+                      show
+                      dropdown-item
+                      p-1
+                      m-0
+                      d-flex
+                      align-items-center
+                      justify-content-between
+                    "
+                    role="alert"
+                  >
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Genral
+                      </label>
+                    </div>
+                  </div>
+                </li>
+                
+                <li class="my-4">
+                  <div
+                    class="
+                      alert
+                      fade
+                      show
+                      dropdown-item
+                      p-1
+                      m-0
+                      d-flex
+                      align-items-center
+                      justify-content-between
+                    "
+                    role="alert"
+                  >
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+                      <label class="form-check-label" for="flexCheckDefault4">
+                        Sports
+                      </label>
+                    </div>
+                  </div>
+                </li>
+                <li class="my-4">
+                  <div
+                    class="
+                      alert
+                      fade
+                      show
+                      dropdown-item
+                      p-1
+                      m-0
+                      d-flex
+                      align-items-center
+                      justify-content-between
+                    "
+                    role="alert"
+                  >
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
+                      <label class="form-check-label" for="flexCheckDefault5">
+                        Gaming
+                      </label>
+                    </div>
+                  </div>
+                </li>
+                <li class="my-4">
+                  <div
+                    class="
+                      alert
+                      fade
+                      show
+                      dropdown-item
+                      p-1
+                      m-0
+                      d-flex
+                      align-items-center
+                      justify-content-between
+                    "
+                    role="alert"
+                  >
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault6">
+                      <label class="form-check-label" for="flexCheckDefault6">
+                        Hiking
+                      </label>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- nav -->
+          <div class="col d-none d-xl-flex justify-content-center">
+            <!-- home -->
+            <div class="mx-4 nav__btn nav__btn-active">
+                <form asp-action="GetHome" asp-controller="Home">
+                   <input name="UserId" class="d-none" value="@curUser.user.Id" />
+                  <button type="submit" class="btn px-4 unbutton">
+                    <i class="fas fa-home text-muted fs-4"></i>
+                  </button>
+              </form>
+            </div>
+            
+            
+            <!-- categories -->
+            <!-- Adventrous + travelling -->
+            <div class="mx-4 nav__btn unbutton">
+           <form asp-action="Adventurours" asp-controller="Home">
+               <input name="UserId" class="d-none" value="@curUser.user.Id" />
+
+                   
+                   <button  type="submit" class="btn px-4 unbutton" >
+                      
+                    <i  title="Adventurous Blogs" class="fa-solid fa-person-hiking text-muted fs-4"></i>
+                
+                  </button>
+             </form>
+            </div>
+          
+            <!-- Sports -->
+            <div class="mx-4 nav__btn" title="Sports BLogs">
+                <form asp-action="Sports" asp-controller="Home">
+                   <input name="UserId" class="d-none" value="@curUser.user.Id" />
+                  <button type="submit" class="btn px-4 unbutton" >
+                
+                    <i class="fa-solid position-relative fa-baseball text-muted fs-4">
+                  
+                    </i>
+                  </button>
+              </form>
+            </div>
+            <!-- gaming -->
+            <div class="mx-4 nav__btn" title="gaming blogs">
+              <form asp-action="Gaming" asp-controller="Home">
+                   <input name="UserId" class="d-none" value="@curUser.user.Id" />
+                  <button type="submit" class="btn px-4 unbutton" >
+                <i class="fas fa-gamepad text-muted fs-4"></i>
+              </button>
+              </form>
+            </div>
+            @*notification*@
+            <div class="mx-4 nav__btn ">
+                <form asp-action="GetNotification" asp-controller="Notification">
+                   <input name="UserId" class="d-none" value="@curUser.user.Id" />
+                  <button type="submit" class="btn px-4 unbutton">
+                    <i class="fa-solid fa-bell text-muted fs-4"></i>
+                  </button>
+                  
+              </form>
+            </div>
+             @if (curUser.AlertCount != 0) {
+
+                        <span  id="Notification_Counter" class="badge badge-notify" style="background:red;position:relative;top:0px;left:-55px;height:15px;width:15px;padding:0 0 0 0;">@curUser.AlertCount</span>
+                         }
+          </div>
+          <!-- menus -->
+          <div class="col d-flex align-items-center justify-content-end">
+            <!-- avatar -->
+            <div
+              class="align-items-center justify-content-center d-none d-xl-flex"
+            >
+              <img
+                src="~/@curUser.user.ImageUrl"
+                class="rounded-circle me-2"
+                alt="avatar"
+                style="width: 38px; height: 38px; object-fit: cover"
+              />
+              <p class="m-0">@curUser.user.FirstName @curUser.user.LastName</p>
+            </div>
+           
+            
+            <!-- profile -->
+            <!-- profile menu -->
+            <div
+              class="
+                rounded-circle
+                p-1
+                bg-gray
+                d-flex
+                align-items-center
+                justify-content-center
+                mx-2
+              "
+              style="width: 38px; height: 38px"
+              type="button"
+              id="secondMenu"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              data-bs-auto-close="outside"
+            >
+              <i class="fas fa-caret-down"></i>
+            </div>
+            <!-- secondary menu dd -->
+            <ul
+              class="dropdown-menu border-0 shadow p-3"
+              aria-labelledby="secondMenu"
+              style="width: 23em"
+            >
+              <!-- avatar -->
+               <form asp-action="EditProfile" asp-controller="Profile">
+                   <input name="UserId" class="d-none" value="@curUser.user.Id" />
+                <button type="submit" class="btn px-4 unbutton" >
+                  <li class="dropdown-item p-1 rounded d-flex" type="button">
+                <img
+                  src="~/@curUser.user.ImageUrl"
+                  id="CurUserImageURL"
+                  alt="avatar"
+                  class="rounded-circle me-2"
+                  style="width: 45px; height: 45px; object-fit: cover"
+                />
+                <div>
+                  <p class="m-0">@curUser.user.FirstName @curUser.user.LastName</p>
+                  <p class="m-0 text-muted">See your profile</p>
+                </div>
+              </li>
+              </button>
+             </form>
+              <hr />
+              <!-- logout -->
+              <li class="dropdown-item p-1 my-3 rounded" type="button">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a
+                      asp-route="LogOut"
+                      class="d-flex text-decoration-none text-dark"
+                    >
+                      <i class="fas fa-cog bg-gray p-2 rounded-circle"></i>
+                      <div
+                        class="
+                          ms-3
+                          d-flex
+                          justify-content-between
+                          align-items-center
+                          w-100
+                        "
+                      >
+                        <p class="m-0">Log Out</p>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <!-- end -->
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- ================= Main ================= -->
+    <div class="container-fluid">
+      <div class="row justify-content-evenly ">
+        <!-- ================= Timeline ================= -->
+        <div class="alert alert-success d-none" id="PostMessage" style="position:absolute;top:71px;width:255px;height:50px" role="alert">
+                      blog posted Successfully.
+          </div>
+          <div class="alert alert-danger d-none" id="PostMessageNot" style="position:absolute;top:71px;width:255px;height:50px" role="alert">
+                      blog did not post Successfully.
+          </div>
+       
+        @if(ViewBag.success==1){
+                <div class="alert alert-success " id="success-alerting" style="position:absolute;top:71px;width:255px;height:50px" role="alert">
+                      You are successfully logged in.
+                 </div>
+          }
+            
+        <div class="col-12 col-lg-8 pb-5">
+          <div
+            class="d-flex flex-column justify-content-center w-100 mx-auto"
+            style="padding-top: 56px; max-width: 780px"
+            id="Main_container"
+          >
+           
+           <!-- create blog -->
+           @*using view components*@
+           <div>
+              
+            <div class="bg-white p-3     mt-3 rounded border shadow">
+                          <!-- avatar -->
+                          <div class="d-flex" type="button">
+                            <div class="p-1">
+                              <img
+                                src="~/@curUser.user.ImageUrl"
+                                alt="avatar"
+                                class="rounded-circle me-2"
+                                style="width: 38px; height: 38px; object-fit: cover"
+                              />
+                            </div>
+                            <input
+                              type="text"
+                              class="form-control rounded-pill border-0 bg-gray pointer"
+                              disabled
+                              placeholder="What's on your mind, @ViewData["firstname"] @ViewData["lastname"] "
+                              data-bs-toggle="modal"
+                              data-bs-target="#createModal"
+                            />
+                          </div>
+
+                          @*do it with ajax jquerry*@
+                          <!-- create modal -->
+                          <form method="post" enctype="multipart/form-data" id="CreatepostForm" autocomplete="off">
+                               <div
+                            class="modal fade"
+                            id="createModal"
+                            tabindex="-1"
+                            aria-labelledby="createModalLabel"
+                            aria-hidden="true"
+                            data-bs-backdrop="false"
+                          >
+                          <input class="d-none" id="CurUserId" value="@curUser.user.Id" />
+             
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <!-- head -->
+                                <div class="modal-header align-items-center">
+                                  <h5
+                                    class="text-dark text-center w-100 m-0"
+                                    id="exampleModalLabel"
+                                  >
+                                    Create Post
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    id="closingPostModal"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
+                                <!-- body -->
+                                <div class="modal-body">
+                                  <div class="my-1 p-1">
+                                    <div class="d-flex flex-column">
+                                      <!-- name -->
+                                      <div class="d-flex align-items-center">
+                                        <div class="p-2">
+                                          <img
+                                            src="~/@curUser.user.ImageUrl"
+                                            alt="from fb"
+                                            class="rounded-circle"
+                                            style="
+                                              width: 38px;
+                                              height: 38px;
+                                              object-fit: cover;
+                                            "
+                                          />
+                                        </div>
+                                        <div>
+                                          <p class="m-0 fw-bold">@ViewData["firstname"] @ViewData["lastname"]</p>
+                              
+                              
+                                          <select 
+                                            class="form-select border-0 bg-gray w-100 fs-7"
+                                            aria-label="Default select example"
+                                            id="PostCategory"
+                                          >
+                                            
+                                            
+                                            <option selected value="General">General</option>
+                                            <option value="Gaming">Gaming</option>
+                                            <option value="Hiking">Hiking</option>
+                                            <option value="Sports">Sports</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <!-- text -->
+                                      <div>
+                                        <textarea
+                                          cols="30"
+                                          rows="5"
+                                          class="form-control border-0"
+                                          id="Postmsg"
+                                        ></textarea>
+                                         <span class="text-danger d-none" id="validationForPostMessage">Blog message can't be empty'</span>
+                                      </div>
+                    
+                                      <!-- options -->
+                                      <div
+                                        class="
+                                          d-flex
+                                          justify-content-between
+                                          border border-1 border-light
+                                          rounded
+                                          p-3
+                                          mt-3
+                                        "
+                                      >
+                                        <p class="m-0">Add to your post</p>
+                                        <div>
+                                            @*when we will deal ajax image handlind*@
+                                            <input type="file" accept="images/*"  class="form-control rounded-pill border-0 bg-gray pointer" id="PostImage" />
+                                          <i
+                                            class="
+                                              fas
+                                              fa-images
+                                              fs-5
+                                              text-success
+                                              pointer
+                                              mx-1
+                                            "
+                                          ></i>
+                              
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!-- end -->
+                                </div>
+                                <!-- footer -->
+                                <div class="modal-footer">
+                                  <button type="button"  id="CreatingPost" class="btn btn-primary w-100">
+                                    Post
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </form>
+            </div>
+           </div>
+            
+              
+          
+            <!-- posts -->
+            
+            <!--using partial view implementation-->
+            @foreach(UserPost up in Model)
+            {
+                if(up==curUser)
+                {
+                    //do nothing 
+                }
+                else
+                {
+                        <partial name="_Blog" model="up" view-data="ViewData"/>
+                }
+                 
+            }
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= Chat Icon ================= -->
+    <div
+      class="fixed-bottom right-100 p-3"
+      style="z-index: 6; left: initial"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#newChat"
+    >
+      <i class="fas fa-edit bg-white rounded-circle p-3 shadow"></i>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

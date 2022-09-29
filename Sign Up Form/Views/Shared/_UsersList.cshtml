@@ -1,0 +1,59 @@
+﻿@model Sign_Up_Form.Models.ViewModel.UserWithLessDetail
+@{
+    //var seconds =(int) DateTime.Now.Subtract(Model.notification.GeneratorTime).TotalSeconds;
+    //var minutes =(int) seconds / 60;
+    //var hours =(int) minutes / 60;
+    //var days =(int) hours / 24;
+}
+<div class="d-flex flex-row justify-content-between bg-light border-bottom osahan-post-header">
+    <div class="p-3 d-flex  align-items-center" style="flex:1 1 0;">
+        <div class="d-flex" >
+            <div class="dropdown-list-image mr-3 d-flex" >
+            <img class="rounded-circle" src="/@Model.ImageUrl" alt="" width="30px" height="30px"/>
+                                    
+            </div>
+            <div class="text-truncate  ps-4" width="auto">@Model.FirstName @Model.LastName
+            
+            </div>
+       
+                             
+        </div>
+                                
+                             
+    </div>
+     
+     <div class="text-truncate pt-3 ps-4" style="flex:1 1 0;" >
+            <span width="120px">Email : @Model.Email</span>
+     </div>
+
+    <div class="p-3 d-flex justify-content-evenly align-items-center bg-light border-bottom" width="20%" style="flex:0.5 0.5  0;">
+        User Id: @Model.Id
+    </div>
+    <div>
+        <span class="ml-auto mb-auto">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-light btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa-regular fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            @if(Model.IsActive)
+                                            {
+                                                 <input type="text" class="d-none" value="@Model.Id"/>
+                                                <input type="Number" class="d-none" value="1"/>
+                        <button class="dropdown-item ActiveDeactiveBtn" type="button"><i class="bi bi-three-dots-vertical"></i><span> Deactivate</span></button>
+
+                    }
+                    else
+                    {
+                         <input type="number" class="d-none" value="@Model.Id"/>
+                        <input type="Number" class="d-none" value="2"/>
+                        <button class="dropdown-item ActiveDeactiveBtn" type="button"><i class="bi bi-three-dots-vertical"></i> <span> Activate</span></button>
+                    }
+
+                                        </div>
+                                    </div>
+                                    <br />
+       
+        </span>
+    </div>
+</div>

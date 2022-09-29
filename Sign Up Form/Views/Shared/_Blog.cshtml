@@ -1,0 +1,338 @@
+﻿@model UserPost;
+
+
+<div class="bg-white p-4 rounded shadow mt-3">
+              <input class="d-none" value="@Model.post.PostId" />
+              <input class="d-none" value="@Model.post.UserId" />
+              <!-- author -->
+              <div class="d-flex justify-content-between">
+                <!-- avatar -->
+                <div class="d-flex">
+                   
+                          <img
+                    src="~/@Model.user.ImageUrl"
+                    alt="avatar"
+                    class="rounded-circle me-2"
+                    style="width: 38px; height: 38px; object-fit: cover"
+                  />
+                    
+        
+                  <div>
+                    <p class="m-0 fw-bold">@Model.user.FirstName @Model.user.LastName</p>
+                    <span class="text-muted fs-7">@Model.post.PostDate</span>
+                  </div>
+                </div>
+                <!-- edit -->
+                <i
+                  class="fas fa-ellipsis-h"
+                  type="button"
+                  id="post1Menu"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                ></i>
+                <!-- edit menu -->
+                <ul
+                  class="dropdown-menu border-0 shadow"
+                  aria-labelledby="post1Menu"
+                >
+                  <li class="d-flex align-items-center">
+                    <a
+                      class="
+                        dropdown-item
+                        d-flex
+                        justify-content-around
+                        align-items-center
+                        fs-7
+                        EditPost
+                      "
+                      
+                    >
+                      Edit Post</a
+                    >
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <a
+                      class="
+                        dropdown-item
+                        d-flex
+                        justify-content-around
+                        align-items-center
+                        fs-7 DeletePost
+                      "
+                      
+                    >
+                      Delete Post</a
+                    >
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <a
+                      class="
+                        dropdown-item
+                        d-flex
+                        justify-content-around
+                        align-items-center
+                        fs-7
+                        ReportPost
+                      "
+                      
+                    >
+                      Report Post</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <!-- post content -->
+              <div class="mt-3">   
+                <!-- content -->
+                <div>
+                  <p>
+                   @Model.post.PostMessage
+
+                  </p>
+                   @if((Model.post.ImageUrl=="") ||(Model.post.ImageUrl==null))
+                    {
+                      //dont display anything
+                       <img
+                    
+                    alt="post image"
+                    class="img-fluid rounded d-none"
+                  />
+                    }
+                    else
+                    {
+                         <img
+                    src="~/@Model.post.ImageUrl"
+                    alt="post image"
+                    class="img-fluid rounded"
+                  />
+                
+                    }
+           
+                </div>
+                <!-- likes & comments -->
+                <div class="post__comment mt-3 position-relative">
+                  <!-- likes -->
+                  <div
+                    class="
+                      d-flex
+                      align-items-center
+                      top-0
+                      start-0
+                      position-absolute
+                    "
+                    style="height: 50px; z-index: 5"
+                  >
+                    <div class="me-2">
+                      <i class="text-primary fas fa-thumbs-up"></i>
+                    </div>
+                    <p  class="m-0 text-muted fs-7">@Model.post.NoOfLikes Likes</p>
+                  </div>
+                  <!-- comments start-->
+                  <div class="accordion" >
+                    <div class="accordion-item border-0"> 
+                      <!-- comment collapse -->
+                      <h2 class="accordion-header" >
+                        <div
+                          class="
+                            accordion-button
+                            collapsed
+                            pointer
+                            d-flex
+                            justify-content-end
+                          "
+                          
+                        >
+                          <p class="m-0">@Model.post.NoOfComments Comments</p>
+                        </div>
+                      </h2>
+                      <hr />
+                      <!-- comment & like bar -->
+                      <div class="d-flex justify-content-around " >
+                        
+                          
+                         @if(@Model.IsLikedByCurUser)
+                            {
+                                <div
+                          class="
+                            dropdown-item
+                            rounded
+                            d-flex
+                            justify-content-center
+                            align-items-center
+                            pointer
+                            likeColor
+                            p-1  
+                            likeSection
+                          "
+                          
+                        >
+                                @*//display in blue*@
+                                <input class="d-none" value="@Model.post.PostId"/>
+                                <i class="fas fa-thumbs-up me-3 likeColor Clike"></i>
+                              <p class="m-0 likeColor Clike">Like</p>
+                              </div>
+                            }
+                            else
+                            {<div
+                          class="
+                            dropdown-item
+                            rounded
+                            d-flex
+                            justify-content-center
+                            align-items-center
+                            pointer
+                            text-muted
+                            p-1  
+                            likeSection
+                          "
+                          
+                        >
+                        <input class="d-none" value="@Model.post.PostId"/>
+                                <i class="fas fa-thumbs-up me-3 text-muted Clike"></i>
+                          <p class="m-0 text-muted Clike">Like</p>
+                          </div>
+                            }
+                            
+                        
+                        <div
+                          class="
+                            dropdown-item
+                            rounded
+                            d-flex
+                            justify-content-center
+                            align-items-center
+                            pointer
+                            text-muted
+                            p-1
+                            getcomments
+                    
+                          "
+                          
+                          data-toggle="collapse" 
+                          data-target="#collapseExample_@Model.post.PostId" 
+                          aria-expanded="false"
+                          aria-controls="collapseExample_@Model.post.PostId"
+                         
+                        >
+                         <input class="d-none" value="@Model.post.PostId"/>
+                          <i class="fas fa-comment-alt getcomments getcomments_child me-3"></i>
+                          <p class="m-0 getcomments getcomments_child">Comment</p>
+                        </div>
+                      </div>
+                      <!-- comment expand -->
+                      <div 
+                          id="collapseExample_@Model.post.PostId"
+                          class="collapse"
+                      >
+                        <div class="alert alert-danger d-none"   role="alert">
+                        You can not delete this Comment.
+                        </div>
+                        <hr />
+                        <div class="accordion-body"> 
+                          <!-- comment 1 -->
+                          <div class="d-none d-flex align-items-center my-1">
+                            <!-- avatar -->
+                            <img
+                              src="https://source.unsplash.com/collection/happy-people"
+                              alt="avatar"
+                              class="rounded-circle me-2"
+                              style="
+                                width: 38px;
+                                height: 38px;
+                                object-fit: cover;
+                              "
+                            />
+                            <!-- comment text -->
+                            <div class="p-3 rounded comment__input w-100">
+                              <!-- comment menu of author -->
+                              <div class="d-flex justify-content-end">
+                                <!-- icon -->
+                                <i
+                                  class="fas fa-ellipsis-h text-blue pointer"
+                                  id="post1CommentMenuButton"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                ></i>
+                                <!-- menu -->
+                                <ul
+                                  class="dropdown-menu border-0 shadow"
+                                  aria-labelledby="post1CommentMenuButton"
+                                >
+                                  <li class="d-flex align-items-center"  >
+                                    <a
+                                      class="
+                                        dropdown-item
+                                        d-flex
+                                        justify-content-around
+                                        align-items-center
+                                        fs-7
+                                        EditComment
+                                      "
+                                     
+                                    >
+                                      Edit Comment</a
+                                    >
+                                  </li>
+                                  <li class="d-flex align-items-center DeleteComment" >
+                                    <a
+                                      class="
+                                        dropdown-item
+                                        d-flex
+                                        justify-content-around
+                                        align-items-center
+                                        fs-7
+                                        DeleteComment
+                                      "
+                                      
+                                    >
+                                      Delete Comment</a
+                                    >
+                                  </li>
+                                </ul>
+                              </div>
+                              <p class="fw-bold m-0">John</p>
+                              <p class="m-0 fs-7 bg-gray p-2 rounded">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit.
+                              </p>
+                            </div>
+                            <input class="d-none" id="PosterId" value=" " />
+                            <input class="d-none" id="PosterMessageId" value=" "/>
+                            <input class="d-none" id="CommentId" value=" "/>
+                          </div>
+                           <hr />
+                          <!-- create comment -->
+                          <form class="d-flex my-1">
+                            <!-- avatar -->
+                            <div>
+                                <input class="d-none" id="CommentatorId_@Model.post.PostId" value="@ViewData["Id"]"/>
+                                <input class="d-none" id="CommentatorPostId_@Model.post.PostId" value="@Model.post.PostId" />
+                              <img
+                                src="~/@ViewData["image"]"
+                                alt="avatar"
+                                class="rounded-circle me-2"
+                                style="
+                                  width: 38px;
+                                  height: 38px;
+                                  object-fit: cover;
+                                "
+                              />
+                            </div>
+                            <!-- input -->
+                            <input
+                              type="text"
+                              class="form-control border-0 rounded-pill bg-gray"
+                              id="comment_Msg_@Model.post.PostId"
+                              placeholder="Write a comment"
+                            />
+                            <button type="button" id="_@Model.post.PostId" class="btn btn-primary rounded-pill postbtn">Post</button>
+                          </form>
+                          <!-- end -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end -->
+                </div>
+              </div>
+            </div>

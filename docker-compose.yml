@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  signupform:
+    image: ${DOCKER_REGISTRY-}signupform
+    build:
+      context: .
+      dockerfile: Sign Up Form/Dockerfile
